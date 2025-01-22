@@ -12,9 +12,9 @@
 (function() {
     'use strict';
 
-    // Regular expression for matching URLs, specifically tuned for Neopets
-    const urlRegex = /(https?:\/\/(?:www\.)?neopets\.com\/[^\s<>"]+)/g;
-
+    // DTI, JN, and Neopets URLs
+    const urlRegex = /(https?:\/\/(?:www\.)?(?:neopets\.com|impress\.openneo\.net|jellyneo\.net)[^\s<>"]+)/g;
+    
     // Function to process a text node
     function processTextNode(node) {
         const text = node.textContent;
