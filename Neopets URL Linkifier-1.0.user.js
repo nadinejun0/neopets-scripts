@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         Neopets URL Linkifier
 // @namespace    snotspoon.neocities.org
-// @version      1.0
+// @version      1.2
 // @description  Convert plaintext URLs into clickable links on Neopets
 // @author       nadinejun0
 // @match        https://www.neopets.com/*
 // @match        http://www.neopets.com/*
 // @grant        none
 // @license      MIT
+// @downloadURL https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.user.js
+// @updateURL https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.meta.js
 // ==/UserScript==
 
 (function() {
@@ -34,9 +36,9 @@
             link.textContent = url;
 
             // Special handling for shop links
-            if (url.includes('browseshop.phtml')) {
-                link.className = 'shop-link';
-                link.target = '_blank'; // Open shop links in new tab
+            if (url.includes('browseshop.phtml') || url.includes('impress.openneo.net')) {
+            link.className = 'shop-link';
+            link.target = '_blank'; // Open shop links in new tab
             }
 
             fragment.appendChild(link);
