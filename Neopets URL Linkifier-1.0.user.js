@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Neopets URL Linkifier
-// @namespace    http://tampermonkey.net/
+// @namespace    snotspoon.neocities.com
 // @version      1.0
 // @description  Convert plaintext URLs into clickable links on Neopets
-// @author       You
+// @author       AI mostly
 // @match        https://www.neopets.com/*
 // @match        http://www.neopets.com/*
 // @grant        none
