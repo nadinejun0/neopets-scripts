@@ -1,12 +1,15 @@
 // ==UserScript==
 // @name         Neopets URL Linkifier
-// @namespace    snotspoon.neocities.com
+// @namespace    snotspoon.neocities.org
 // @version      1.0
 // @description  Convert plaintext URLs into clickable links on Neopets
 // @author       AI mostly
 // @match        https://www.neopets.com/*
 // @match        http://www.neopets.com/*
 // @grant        none
+// @license      MIT
+// @downloadURL https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.user.js
+// @updateURL https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.meta.js
 // ==/UserScript==
 
 (function() {
