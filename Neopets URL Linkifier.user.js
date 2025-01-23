@@ -1,18 +1,21 @@
 // ==UserScript==
 // @name         Neopets URL Linkifier
-// @namespace    http://tampermonkey.net/
-// @version      1.4
+// @namespace    snotspoon.neocities.org
+// @version      1.5
 // @description  Convert plaintext URLs into clickable links on Neopets
-// @author       You
+// @author       nadinejun0
 // @match        https://www.neopets.com/*
 // @match        http://www.neopets.com/*
 // @grant        none
+// @license      MIT
+// @downloadURL https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.user.js
+// @updateURL https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.meta.js
 // ==/UserScript==
 
 (function() {
     'use strict';
     // Regular expression for matching URLs - both with and without http(s)://
-    const urlRegex = /((?:https?:\/\/)?(?:www\.)?(?:(?:neopets\.com\/[^\s<>"]+)|(?:impress\.openneo\.net\/[^\s<>"]+)|(?:items\.jellyneo\.net\/[^\s<>"]+)))/g;
+    const urlRegex = /((?:https?:\/\/)?(?:www\.)?(?:(?:neopets\.com\/[^\s<>"]+)|(?:impress\.openneo\.net\/[^\s<>"]+)|(?:impress-2020\.openneo\.net\/[^\s<>"]+)|(?:items\.jellyneo\.net\/[^\s<>"]+)))/g;
 
     // Function to process a text node
     function processTextNode(node) {
@@ -33,9 +36,10 @@
             link.textContent = url;
 
             // Special handling for shop links and fansite links
-            if (url.includes('browseshop.phtml') ||
+            if (url.includes('neopets.com') ||
                 url.includes('impress.openneo.net') ||
-                url.includes('items.jellyneo.net')) {
+                url.includes('impress-2020.openneo.net') ||
+                url.includes('jellyneo.net')) {
                 link.target = '_blank';
             }
 
