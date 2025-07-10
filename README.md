@@ -4,6 +4,14 @@ A collection of user scripts that enhance the Neopets.com experience by adding Q
 
 ## Scripts
 
+### 💬 Neoboards User Buttons (v1.3)
+Adds convenient buttons next to report buttons on Neoboards posts.
+
+- **Target**: All Neoboards pages (`/neoboards/*`)
+- **Features**:
+  - Neomail User button - opens compose window in new tab
+  - Copy Username button - copies username to clipboard
+
 ### Lab Ray Pet Grid (v3.0)
 Replaces the default pet carousel with a clean grid layout on the Lab Ray page.See all pets at once, faster pet selection. No more side scroll!
 
@@ -12,7 +20,8 @@ Replaces the default pet carousel with a clean grid layout on the Lab Ray page.S
   - Square pet cards with larger portraits
   - Pet names displayed below each portrait
   - Neopets-themed style
-  
+  ![2025-07-10 00 05 49](https://github.com/user-attachments/assets/1fa0d623-c332-4a49-b167-d96962f7331a)
+
 
 ### URL Linkifier (v1.5)
 Automatically converts plaintext URLs into clickable links on Neoboards
