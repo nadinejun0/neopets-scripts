@@ -12,6 +12,8 @@ Adds convenient buttons next to report buttons on Neoboards posts.
   - Neomail User button - opens compose window in new tab
   - Copy Username button - copies username to clipboard
 
+![image](https://github.com/user-attachments/assets/1af0d927-e3cc-4d00-ba17-db7430bbbb9b)
+
 ### Lab Ray Pet Grid (v3.0)
 Replaces the default pet carousel with a clean grid layout on the Lab Ray page.See all pets at once, faster pet selection. No more side scroll!
 
@@ -20,7 +22,8 @@ Replaces the default pet carousel with a clean grid layout on the Lab Ray page.S
   - Square pet cards with larger portraits
   - Pet names displayed below each portrait
   - Neopets-themed style
-  ![2025-07-10 00 05 49](https://github.com/user-attachments/assets/1fa0d623-c332-4a49-b167-d96962f7331a)
+ 
+![2025-07-10 00 05 49](https://github.com/user-attachments/assets/1fa0d623-c332-4a49-b167-d96962f7331a)
 
 
 ### URL Linkifier (v1.5)
