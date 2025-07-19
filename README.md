@@ -26,6 +26,17 @@ Replaces the default pet carousel with a clean grid layout on the Lab Ray page.S
 ![2025-07-10 00 05 49](https://github.com/user-attachments/assets/1fa0d623-c332-4a49-b167-d96962f7331a)
 
 
+### Neopets Message Cleaner (v0.7)
+Customizable message deletion tool for Neomail management.
+
+- **Target**: Neomail page (`/neomessages.phtml`)
+- **Features**:
+  - Delete read messages automatically
+  - Remove gift/purchase notifications
+  - Delete messages older than specified days (default: 60 days)
+  - Custom keyword filtering
+  - One-click bulk deletion
+
 ### URL Linkifier (v1.5)
 Automatically converts plaintext URLs into clickable links on Neoboards
 
