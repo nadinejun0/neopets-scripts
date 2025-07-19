@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Neopets URL Linkifier
+// @name         [sn0tspoon] Neopets URL Linkifier
 // @namespace    snotspoon.neocities.org
 // @version      1.5
 // @description  Convert plaintext URLs into clickable links on Neopets

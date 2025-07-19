@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Neoboards User Buttons
+// @name         [sn0tspoon] Neoboards User Buttons
 // @namespace    http://snotspoon.neocities.com
 // @version      1.3
 // @description  Inserts "Neomail User" and "Copy Username" buttons to the left of report buttons on Neoboards posts

@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Neopets Lab Ray Pet Grid
+// @name         [sn0tspoon] Neopets Lab Ray Pet Grid
 // @description  Displays all your pet portraits in a grid. No more click to scroll!
 // @namespace    snotspoon.neocities.org
 // @author       nadinejun0

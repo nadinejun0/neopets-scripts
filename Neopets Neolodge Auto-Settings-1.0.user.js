@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Neopets Neolodge Auto-Settings
+// @name         [sn0tspoon] Neopets Neolodge Auto-Settings
 // @description  Automatically selects your last used lodge settings when the page loads
 // @namespace    snotspoon.neocities.org
 // @author       nadinejun0
