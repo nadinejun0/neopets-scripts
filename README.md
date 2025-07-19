@@ -21,7 +21,6 @@ Replaces the default pet carousel with a clean grid layout on the Lab Ray page.S
 - **Features**:  
   - Square pet cards with larger portraits
   - Pet names displayed below each portrait
-  - Neopets-themed style
  
 ![2025-07-10 00 05 49](https://github.com/user-attachments/assets/1fa0d623-c332-4a49-b167-d96962f7331a)
 
