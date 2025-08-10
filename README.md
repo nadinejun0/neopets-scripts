@@ -5,52 +5,52 @@ A collection of user scripts that enhance the Neopets.com experience by adding Q
 ## Scripts
 
 ### 💬 Neoboards User Buttons (v1.3)
-Adds convenient buttons next to report buttons on Neoboards posts.
+Quick action buttons for interacting with other users on the boards.
 
-- **Target**: All Neoboards pages (`/neoboards/*`)
-- **Features**:
-  - Neomail User button - opens compose window in new tab
-  - Copy Username button - copies username to clipboard
+**What it does**: Adds "Neomail User" and "Copy Username" buttons next to every post
+**Why it's useful**: Send messages or copy usernames without manually typing them
 
 ![image](https://github.com/user-attachments/assets/1af0d927-e3cc-4d00-ba17-db7430bbbb9b)
 
 ### Lab Ray Pet Grid (v3.0)
-Replaces the default pet carousel with a clean grid layout on the Lab Ray page.See all pets at once, faster pet selection. No more side scroll!
+See all your pets at once on the Lab Ray page instead of scrolling through a carousel.
 
-- **Target**: Lab Ray page (`/lab2.phtml`)
-- **Features**:  
-  - Square pet cards with larger portraits
-  - Pet names displayed below each portrait
- 
+**What it does**: Replaces the pet carousel with a clean grid showing all pets
+**Why it's useful**: Faster pet selection, no more endless click-scrolling
+
 ![2025-07-10 00 05 49](https://github.com/user-attachments/assets/1fa0d623-c332-4a49-b167-d96962f7331a)
 
+### 📧 Neomail Canned Responses (v1.0)
+Save time writing common Neomail replies with pre-written templates.
+
+**What it does**: Adds quick-insert buttons for common response messages
+**Why it's useful**: Perfect for NC traders, guild leaders, or anyone who sends similar messages often
+
+![image](https://i.ibb.co/qvCNzyK/2025-08-10-13-31-50.gif)
 
 ### Neopets Message Cleaner (v0.7)
-Customizable message deletion tool for Neomail management.
+Keep your Neomail inbox organized with automated cleanup options.
 
-- **Target**: Neomail page (`/neomessages.phtml`)
-- **Features**:
-  - Delete read messages automatically
-  - Remove gift/purchase notifications
-  - Delete messages older than specified days (default: 60 days)
-  - Custom keyword filtering
-  - One-click bulk deletion
+**What it does**: Bulk delete messages based on your preferences (read status, age, keywords)
+**Why it's useful**: Clean up hundreds of old messages in seconds instead of deleting one by one
+**Customization**: Edit the script settings to change deletion criteria, message age thresholds, and keyword filters
 
-### URL Linkifier (v1.5)
-Automatically converts plaintext URLs into clickable links on Neoboards
+### URL Linkifier (v1.7)
+Turn plain text URLs into clickable links on the Neoboards. (i'm aware there are browser extensions that offer the same benefit, but found they don't work well on neopets)
 
-- **Supported Sites**: neopets.com, impress.openneo.net, impress-2020.openneo.net, items.jellyneo.net
-- **Benefits**: Click URLs directly without copy/pasting
-
+**What it does**: Makes URLs clickable in posts and signatures
+**Why it's useful**: Click links directly instead of copy-pasting them into your browser
+**Works with**: Neopets pages, DTI, Jellyneo item database
 
 ### Neolodge Auto-Settings (v1.0)
 Automatically remembers and restores your last used lodge booking settings.
 
-- **Target**: Neolodge (`/neolodge.phtml`)
-- **Features**: Auto-populates pet, hotel, extras, and nights selections
-- **Benefits**: No need to re-select preferences each visit
+**What it does**: Saves your last booking choices (pet, hotel, length, etc.)
+**Why it's useful**: Skip the setup and book your usual stay with one click- no need to re-select preferences each visit
 
 ## Installation
+
+Note: I use Firefox, so cannot verify how compatible they are with each browser's quirks
 
 Install a UserScript manager:
    - **Chrome/Edge**: [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)

@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.7
 // @description  Customizable message deletion - delete read messages, gift/purchase notifications, old messages, and custom keywords
-// @author       snotspoon.neocities.com
+// @author       nadinejun0
 // @match        *://www.neopets.com/neomessages.phtml*
 // @grant        none
 // ==/UserScript==

@@ -5,8 +5,9 @@
 // @description  Inserts "Neomail User" and "Copy Username" buttons to the left of report buttons on Neoboards posts
 // @match        *://www.neopets.com/neoboards/*
 // @grant        none
-// @author       @nadinejun0
+// @author       nadinejun0
 // @license      MIT
+// @run-at       document-end
 // ==/UserScript==
 
 (() => {
@@ -190,9 +191,9 @@
         });
     };
 
-    // ═══════════════════════════════════════════════════════════════════════════════════════════════
+  
     // INITIALIZATION
-    // ═══════════════════════════════════════════════════════════════════════════════════════════════
+    // 
 
     /** main initialization function */
     const initialize = () => {

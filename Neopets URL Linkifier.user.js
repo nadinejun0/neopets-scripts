@@ -1,111 +1,157 @@
 // ==UserScript==
 // @name         [sn0tspoon] Neopets URL Linkifier
 // @namespace    snotspoon.neocities.org
-// @version      1.5
+// @version      1.7
 // @description  Convert plaintext URLs into clickable links on Neopets
 // @author       nadinejun0
 // @match        https://www.neopets.com/*
 // @match        http://www.neopets.com/*
 // @grant        none
 // @license      MIT
-// @downloadURL https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.user.js
-// @updateURL https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.meta.js
+// @downloadURL  https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.user.js
+// @updateURL    https://update.greasyfork.org/scripts/524570/Neopets%20URL%20Linkifier.meta.js
+// @run-at       document-end
 // ==/UserScript==
 
-(function() {
-    'use strict';
-    // Regular expression for matching URLs - both with and without http(s)://
-    const urlRegex = /((?:https?:\/\/)?(?:www\.)?(?:(?:neopets\.com\/[^\s<>"]+)|(?:impress\.openneo\.net\/[^\s<>"]+)|(?:impress-2020\.openneo\.net\/[^\s<>"]+)|(?:items\.jellyneo\.net\/[^\s<>"]+)))/g;
+(function () {
+  'use strict';
 
-    // Function to process a text node
-    function processTextNode(node) {
-        const text = node.textContent;
-        if (!text.match(urlRegex)) return;
+  // URL pattern used by both matching and testing
+  const URL_PATTERN =
+    '(?:https?:\\/\\/)?(?:www\\.)?(?:(?:neopets\\.com\\/[^\\s<>"\']+)|(?:impress\\.openneo\\.net\\/[^\\s<>"\']+)|(?:impress-2020\\.openneo\\.net\\/[^\\s<>"\']+)|(?:items\\.jellyneo\\.net\\/[^\\s<>"\']+))';
 
-        const fragment = document.createDocumentFragment();
-        let lastIndex = 0;
+  const urlRegex = new RegExp(URL_PATTERN, 'g');      // for exec loop
+  const urlTest = new RegExp(URL_PATTERN);            // for quick .test
 
-        text.replace(urlRegex, (url, offset) => {
-            // Add text before the URL
-            fragment.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+  const SKIP_SELECTOR = 'a,script,style,textarea,input';
 
-            // Create the link
-            const link = document.createElement('a');
-            // Add https:// if it's missing
-            link.href = url.startsWith('http') ? url : 'https://' + url;
-            link.textContent = url;
+  // replace plaintext URLs inside <a> elements
+  function processTextNode(node) {
+    const text = node.textContent;
+    if (!text || !urlTest.test(text)) return;
+    if (!node.parentNode) return;
 
-            // Special handling for shop links and fansite links
-            if (url.includes('neopets.com') ||
-                url.includes('impress.openneo.net') ||
-                url.includes('impress-2020.openneo.net') ||
-                url.includes('jellyneo.net')) {
-                link.target = '_blank';
-            }
+    // exclusions
+    if (node.parentNode.closest && node.parentNode.closest(SKIP_SELECTOR)) return;
 
-            fragment.appendChild(link);
-            lastIndex = offset + url.length;
-        });
+    const fragment = document.createDocumentFragment();
+    let lastIndex = 0;
+    urlRegex.lastIndex = 0;
 
-        // Add any remaining text
-        if (lastIndex < text.length) {
-            fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+    let match;
+    while ((match = urlRegex.exec(text)) !== null) {
+      const matchedUrl = match[0];
+      const start = match.index;
+
+      // append text before the match
+      if (start > lastIndex) {
+        fragment.appendChild(document.createTextNode(text.slice(lastIndex, start)));
+      }
+
+      // create link
+      const link = document.createElement('a');
+      const href = matchedUrl.startsWith('http') ? matchedUrl : 'https://' + matchedUrl;
+      link.href = href;
+      link.textContent = matchedUrl;
+
+      if (
+        matchedUrl.includes('neopets.com') ||
+        matchedUrl.includes('impress.openneo.net') ||
+        matchedUrl.includes('impress-2020.openneo.net') ||
+        matchedUrl.includes('jellyneo.net')
+      ) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
+
+      fragment.appendChild(link);
+      lastIndex = start + matchedUrl.length;
+    }
+
+    // append any remaining trailing text
+    if (lastIndex < text.length) {
+      fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+
+
+      if (node.parentNode) {
+      node.parentNode.replaceChild(fragment, node);
+    }
+  }
+
+  function processContainer(container) {
+    const walker = document.createTreeWalker(
+      container,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: (n) => {
+          if (!n.nodeValue || !urlTest.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+          const p = n.parentNode;
+          if (!p) return NodeFilter.FILTER_REJECT;
+          if (p.closest && p.closest(SKIP_SELECTOR)) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        },
+      },
+      false
+    );
+
+    const nodes = [];
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n);
+    for (const tn of nodes) processTextNode(tn);
+  }
+
+  // Process specific sections of board posts
+  function processNeoPosts(root = document) {
+    // main post content
+    root.querySelectorAll('.boardPostMessage').forEach((post) => processContainer(post));
+
+    // signatures area after separator span
+    root.querySelectorAll('span[style*="color:#818181"]').forEach((separator) => {
+      const nextNode = separator.nextSibling;
+      if (!nextNode) return;
+      if (nextNode.nodeType === Node.TEXT_NODE) {
+        processTextNode(nextNode);
+      } else if (nextNode.nodeType === Node.ELEMENT_NODE) {
+        processContainer(nextNode);
+      }
+    });
+  }
+
+  // init
+  processNeoPosts(document);
+
+  // observer
+  const observer = new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      for (const node of m.addedNodes) {
+        if (node.nodeType !== Node.ELEMENT_NODE) continue;
+
+        if (node.classList && node.classList.contains('boardPostMessage')) {
+          processContainer(node);
+          continue;
         }
 
-        // Replace the original text node with our fragment
-        node.parentNode.replaceChild(fragment, node);
-    }
+        const post = node.querySelector && node.querySelector('.boardPostMessage');
+        if (post) processContainer(post);
 
-    // Function to walk through DOM nodes within a specific scope
-    function walkNodes(node) {
-        if (node.nodeType === Node.TEXT_NODE) {
-            processTextNode(node);
-            return;
+        // Also handle new separators that might appear
+        if (node.matches && node.matches('span[style*="color:#818181"]')) {
+          const nextNode = node.nextSibling;
+          if (nextNode) {
+            if (nextNode.nodeType === Node.TEXT_NODE) processTextNode(nextNode);
+            else if (nextNode.nodeType === Node.ELEMENT_NODE) processContainer(nextNode);
+          }
+        } else if (node.querySelector) {
+          node.querySelectorAll('span[style*="color:#818181"]').forEach((sep) => {
+            const nn = sep.nextSibling;
+            if (!nn) return;
+            if (nn.nodeType === Node.TEXT_NODE) processTextNode(nn);
+            else if (nn.nodeType === Node.ELEMENT_NODE) processContainer(nn);
+          });
         }
-
-        // Skip certain elements where we don't want to process URLs
-        const skipTags = ['SCRIPT', 'STYLE', 'A', 'TEXTAREA', 'INPUT'];
-        if (skipTags.includes(node.nodeName)) return;
-
-        // Process child nodes
-        Array.from(node.childNodes).forEach(walkNodes);
+      }
     }
+  });
 
-    // Process specific sections of board posts
-    function processNeoPosts() {
-        // Process main post content
-        const boardPosts = document.querySelectorAll('.boardPostMessage');
-        boardPosts.forEach(post => walkNodes(post));
-
-        // Process signatures (text after the separator)
-        const postSeparators = document.querySelectorAll('span[style*="color:#818181"]');
-        postSeparators.forEach(separator => {
-            const nextNode = separator.nextSibling;
-            if (nextNode) {
-                walkNodes(nextNode);
-            }
-        });
-    }
-
-    // Initial processing
-    processNeoPosts();
-
-    // Set up a MutationObserver to handle dynamically added content
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach(mutation => {
-            mutation.addedNodes.forEach(node => {
-                if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (node.classList.contains('boardPostMessage') ||
-                        node.querySelector('.boardPostMessage')) {
-                        processNeoPosts();
-                    }
-                }
-            });
-        });
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+  observer.observe(document.body, { childList: true, subtree: true });
 })();

@@ -3,9 +3,13 @@
 // @description  Displays all your pet portraits in a grid. No more click to scroll!
 // @namespace    snotspoon.neocities.org
 // @author       nadinejun0
-// @version      3.0
+// @version      3.1
 // @match        https://www.neopets.com/lab2.phtml
+// @license MIT
+// @downloadURL https://update.greasyfork.org/scripts/524983/%5Bsn0tspoon%5D%20Neopets%20Lab%20Ray%20Pet%20Grid.user.js
+// @updateURL https://update.greasyfork.org/scripts/524983/%5Bsn0tspoon%5D%20Neopets%20Lab%20Ray%20Pet%20Grid.meta.js
 // ==/UserScript==
+
 
 (function() {
     'use strict';

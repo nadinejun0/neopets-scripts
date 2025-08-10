@@ -3,7 +3,7 @@
 // @description  Automatically selects your last used lodge settings when the page loads
 // @namespace    snotspoon.neocities.org
 // @author       nadinejun0
-// @version      1.1
+// @version      1.0
 // @match        https://www.neopets.com/neolodge.phtml*
 // @match        https://*.neopets.com/neolodge.phtml*
 // @grant        none
